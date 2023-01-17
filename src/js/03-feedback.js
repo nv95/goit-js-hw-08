@@ -5,8 +5,9 @@ const refs = {
   email: document.querySelector('.feedback-form input'),
   message: document.querySelector('.feedback-form input'),
 };
-const STORAGE_KEY = 'feedback-form-state';
+
 let formData = {};
+const STORAGE_KEY = 'feedback-form-state';
 
 refs.form.addEventListener('submit', onSubmitForm);
 refs.form.addEventListener('input', throttle(onMessageForm, 500));
@@ -14,7 +15,7 @@ refs.form.addEventListener('input', throttle(onMessageForm, 500));
 reloadPage();
 
 function onMessageForm(e) {
-  formData[e.target.neme] = e.target.value.trim();
+  formData[e.target.name] = e.target.value.trim();
   localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
 }
 
@@ -33,7 +34,6 @@ function reloadPage() {
 function onSubmitForm(e) {
   e.preventDefault();
   console.log(formData);
-
   e.currentTarget.reset();
   localStorage.removeItem(STORAGE_KEY);
 }
